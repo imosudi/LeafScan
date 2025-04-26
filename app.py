@@ -1,3 +1,4 @@
+import time
 from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import datetime
 import os
@@ -54,34 +55,84 @@ def index():
         session['history'] = []
 
     if request.method == 'POST':
-        leaf_color = request.form['leaf_color']
-        spots = request.form['spots']
-        wilt = request.form['wilt']
-        file = request.files.get('plant_image')
+        leaf_color      = request.form['leaf_color']
+        spots           = request.form['spots']
+        wilt            = request.form['wilt']
+        leaf_curling    = request.form['leaf_curling']
+        stunted_growth  = request.form['stunted_growth']
+        leaf_drop       = request.form['leaf_drop']
+        stem_damage     = request.form['stem_damage']
+        unusual_smell   = request.form['unusual_smell']
+        soil_condition  = request.form['soil_condition']
+        notes           = request.form['notes']
+        plant_type      = request.form['plant_type']
+        plant_age       = request.form['plant_age']
 
+        file = request.files.get('plant_image')
         image_url = None
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             image_url = url_for('static', filename='uploads/' + filename)
-        diagnosis_system = PlantDiagnosisEngine()
-         # Basic usage with core symptoms
-        diagnosis, explanation, treatment, severity, preventive_measures = diagnosis_system.diagnose_plant(leaf_color, spots, wilt)
-        #diagnosis, explanation = diagnose_plant(leaf_color, spots, wilt)
 
-        # Save diagnosis to session history
+        # Advanced usage with additional symptoms
+        additional_info = {
+            'leaf_curling': leaf_curling,
+            'stunted_growth': stunted_growth,
+            'leaf_drop': leaf_drop,
+            'stem_damage': stem_damage,
+            'unusual_smell': unusual_smell,
+            'soil_condition': soil_condition,
+            'plant_type': plant_type,
+            'plant_age': plant_age,
+            'notes' : notes
+        }
+        # Initialise diagnosis engine
+        diagnosis_system = PlantDiagnosisEngine()
+
+        # Full diagnosis using all features (make sure your class handles this)
+        diagnosis, explanation, treatment, severity, preventive_measures = diagnosis_system.diagnose_plant(
+            leaf_color=leaf_color,
+            spots=spots,
+            wilt=wilt,
+           additional_symptoms= additional_info 
+
+            #leaf_curling=leaf_curling,
+            #stunted_growth=stunted_growth,
+            #leaf_drop=leaf_drop,
+            #stem_damage=stem_damage,
+            #unusual_smell=unusual_smell,
+            #soil_condition=soil_condition,
+            #plant_type=plant_type,
+            #plant_age=plant_age,
+            #notes=notes
+        )
+
+        # Save all inputs and results to history
         session['history'].append({
             'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'leaf_color': leaf_color,
             'spots': spots,
             'wilt': wilt,
+            'leaf_curling': leaf_curling,
+            'stunted_growth': stunted_growth,
+            'leaf_drop': leaf_drop,
+            'stem_damage': stem_damage,
+            'unusual_smell': unusual_smell,
+            'soil_condition': soil_condition,
+            'plant_type': plant_type,
+            'plant_age': plant_age,
+            'notes': notes,
             'diagnosis': diagnosis,
             'explanation': explanation,
+            'treatment': treatment,
+            'severity': severity,
+            'preventive_measures': preventive_measures,
             'image': image_url
         })
-        session.modified = True
 
+        session.modified = True
         return redirect(url_for('result'))
 
     return render_template('index.html')

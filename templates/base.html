@@ -3,15 +3,118 @@
 <head>
     <title>Plant Diagnosis Expert System</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{url_for('static', filename='assets/favicons/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{url_for('static', filename='assets/favicons/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{url_for('static', filename='assets/favicons/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{url_for('static', filename='assets/favicons/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{url_for('static', filename='assets/favicons/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{url_for('static', filename='assets/favicons/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{url_for('static', filename='assets/favicons/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{url_for('static', filename='assets/favicons/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='assets/favicons/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{url_for('static', filename='assets/favicons/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='assets/favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{url_for('static', filename='assets/favicons/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='assets/favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{url_for('static', filename='assets/favicons/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{url_for('static', filename='assets/favicons/ms-icon-144x144.png')}}">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        .form-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #198754;
+        }
+        .form-section h4 {
+            color: #198754;
+            margin-bottom: 15px;
+        }
+        .header-section {
+            background-color: #198754;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .btn-success {
+            background-color: #198754;
+            border-color: #198754;
+            padding: 10px 30px;
+        }
+        .btn-success:hover {
+            background-color: #146c43;
+            border-color: #146c43;
+        }
+        .image-preview {
+            max-width: 100%;
+            height: 200px;
+            border: 2px dashed #dee2e6;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        label {
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body class="bg-light">
     <div class="container py-4">
         <h1 class="mb-4"> {% include 'includes/icon2.html' %} Plant Disease Diagnosis</h1>
         
-        {% block main_page %}
+        {% block main_pages %}
         
         {% endblock %}
     
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+        
+        // Image preview
+        document.getElementById('plant_image').addEventListener('change', function(e) {
+            const previewImg = document.getElementById('preview-img');
+            const previewText = document.getElementById('preview-text');
+            
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                    previewText.style.display = 'none';
+                }
+                
+                reader.readAsDataURL(this.files[0]);
+            } else {
+                previewImg.style.display = 'none';
+                previewText.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
