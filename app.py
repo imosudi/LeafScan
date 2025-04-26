@@ -3,6 +3,10 @@ from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
 
+from logic import PlantDiagnosisEngine
+
+
+
 app = Flask(__name__)
 app.secret_key = 'secret'
 UPLOAD_FOLDER = 'static/uploads'
@@ -61,8 +65,10 @@ def index():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             image_url = url_for('static', filename='uploads/' + filename)
-
-        diagnosis, explanation = diagnose_plant(leaf_color, spots, wilt)
+        diagnosis_system = PlantDiagnosisEngine()
+         # Basic usage with core symptoms
+        diagnosis, explanation, treatment, severity, preventive_measures = diagnosis_system.diagnose_plant(leaf_color, spots, wilt)
+        #diagnosis, explanation = diagnose_plant(leaf_color, spots, wilt)
 
         # Save diagnosis to session history
         session['history'].append({
