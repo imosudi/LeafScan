@@ -1,188 +1,45 @@
-
 {% extends 'base.html' %}
+{% block main_pages %}
 
-    {% block main_pages %}
-    <h2 class="mb-4">Diagnosis Inputs</h2>
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <div class="header-section">
-                <h2 class="text-center mb-2"> Complete the form below to diagnose your plant's condition</h2>
-            </div>
-            <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+<div class="container py-2">
+    <div class="text-center mb-2">
+        <!-- Title and Tagline -->
+        <h1 class="mt-4 fw-bold text-success">Welcome to LeafScan</h1>
+        <p class="lead text-muted">Your smart companion for diagnosing plant health issues effortlessly.</p>
 
-                <!-- Primary Symptoms Section -->
-                <div class="form-section">
-                    <h4><i class="bi bi-clipboard-pulse"></i> Primary Symptoms</h4>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="leaf_color" class="form-label">
-                                <i class="bi bi-palette"></i> Leaf Color
-                            </label>
-                            <select class="form-select" name="leaf_color" id="leaf_color" required>
-                                <option value="">Select Color</option>
-                                <option value="green">Green</option>
-                                <option value="yellow">Yellow</option>
-                                <option value="brown">Brown</option>
-                                <option value="pale_green">Pale Green</option>
-                                <option value="purple">Purple</option>
-                            </select>
-                            <div class="invalid-feedback">Please select a leaf color.</div>
-                        </div>
-            
-                        <div class="col-md-4 mb-3">
-                            <label for="spots" class="form-label">
-                                <i class="bi bi-droplet-half"></i> Spots on Leaves
-                            </label>
-                            <select class="form-select" name="spots" id="spots" required>
-                                <option value="">Select Option</option>
-                                <option value="no">No Spots</option>
-                                <option value="yes">Yes (General)</option>
-                                <option value="yellow_spots">Yellow Spots</option>
-                                <option value="black_spots">Black Spots</option>
-                                <option value="brown_spots">Brown Spots</option>
-                            </select>
-                            <div class="invalid-feedback">Please select an option for spots.</div>
-                        </div>
-            
-                        <div class="col-md-4 mb-3">
-                            <label for="wilt" class="form-label">
-                                <i class="bi bi-water"></i> Wilting Status
-                            </label>
-                            <select class="form-select" name="wilt" id="wilt" required>
-                                <option value="">Select Option</option>
-                                <option value="no">No Wilting</option>
-                                <option value="mild">Mild Wilting</option>
-                                <option value="yes">Moderate Wilting</option>
-                                <option value="severe">Severe Wilting</option>
-                            </select>
-                            <div class="invalid-feedback">Please select wilting status.</div>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Additional Symptoms Section -->
-                <div class="form-section">
-                    <h4><i class="bi bi-clipboard-check"></i> Additional Symptoms</h4>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="leaf_curling" class="form-label">
-                                <i class="bi bi-arrow-repeat"></i> Leaf Curling
-                            </label>
-                            <select class="form-select" name="leaf_curling" id="leaf_curling">
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-            
-                        <div class="col-md-4 mb-3">
-                            <label for="stunted_growth" class="form-label">
-                                <i class="bi bi-bar-chart-line"></i> Stunted Growth
-                            </label>
-                            <select class="form-select" name="stunted_growth" id="stunted_growth">
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-            
-                        <div class="col-md-4 mb-3">
-                            <label for="leaf_drop" class="form-label">
-                                <i class="bi bi-arrow-down-circle"></i> Leaf Drop
-                            </label>
-                            <select class="form-select" name="leaf_drop" id="leaf_drop">
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-                    </div>
-            
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="stem_damage" class="form-label">
-                                <i class="bi bi-flower2"></i> Stem Damage
-                            </label>
-                            <select class="form-select" name="stem_damage" id="stem_damage">
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-            
-                        <div class="col-md-4 mb-3">
-                            <label for="unusual_smell" class="form-label">
-                                <i class="bi bi-wind"></i> Unusual Smell
-                            </label>
-                            <select class="form-select" name="unusual_smell" id="unusual_smell">
-                                <option value="no">No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-            
-                        <div class="col-md-4 mb-3">
-                            <label for="soil_condition" class="form-label">
-                                <i class="bi bi-cloud-drizzle"></i> Soil Condition
-                            </label>
-                            <select class="form-select" name="soil_condition" id="soil_condition">
-                                <option value="normal">Normal</option>
-                                <option value="dry">Dry</option>
-                                <option value="wet">Wet</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Image Upload Section -->
-                <div class="form-section">
-                    <h4><i class="bi bi-camera"></i> Plant Image</h4>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="plant_image" class="form-label">
-                                <i class="bi bi-file-image"></i> Upload Image (Optional)
-                            </label>
-                            <input type="file" class="form-control" name="plant_image" id="plant_image" accept=".jpg,.jpeg,.png">
-                            <div class="form-text">For better diagnosis, upload a clear image of affected plant parts.</div>
-                            <div class="image-preview" id="imagePreview">
-                                <img src="" alt="Image Preview" id="preview-img">
-                                <span id="preview-text">Image preview will appear here</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Additional Notes Section -->
-                <div class="form-section">
-                    <h4><i class="bi bi-pencil-square"></i> Additional Information</h4>
-                    <div class="mb-3">
-                        <label for="notes" class="form-label">
-                            <i class="bi bi-chat-left-text"></i> Notes or Observations
-                        </label>
-                        <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter any additional observations or details about your plant..."></textarea>
-                    </div>
-            
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="plant_type" class="form-label">
-                                <i class="bi bi-flower3"></i> Plant Type (If Known)
-                            </label>
-                            <input type="text" class="form-control" id="plant_type" name="plant_type" placeholder="E.g., Rose, Tomato, Fern, etc.">
-                        </div>
-            
-                        <div class="col-md-6 mb-3">
-                            <label for="plant_age" class="form-label">
-                                <i class="bi bi-calendar3"></i> Plant Age (If Known)
-                            </label>
-                            <input type="text" class="form-control" id="plant_age" name="plant_age" placeholder="E.g., 2 months, 1 year, etc.">
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                    <button type="submit" class="btn btn-success btn-lg">
-                        <i class="bi bi-search-heart"></i> Diagnose Plant
-                    </button>
-                </div>
-            
-            </form>
-            
+        <!-- Logo -->
+        <img src="{{url_for('static', filename='assets/images/leafscan2.png')}}" class="responsive" width="450" alt="" srcset="">
+
+        
+
+        <!-- Action Button -->
+        <div class="mt-4">
+            <a href="{{ url_for('diagnosis') }}" class="btn btn-success btn-lg px-4">Diagnose Your Plant</a>
         </div>
     </div>
-    {% endblock %}
 
+    <!-- Features Section -->
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <a href="{{ url_for('diagnosis') }}" >
+                <i class="bi bi-search text-success" style="font-size: 3rem;"></i>
+            </a>
+            <h4 class="mt-3">Smart Diagnosis</h4>
+            <p>Get instant diagnosis based on symptoms and plant image analysis.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <i class="bi bi-bar-chart-line text-success" style="font-size: 3rem;"></i>
+            <h4 class="mt-3">Track History</h4>
+            <p>View your past diagnosis records and monitor plant health over time.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{{ url_for('tips') }}" >
+                <i class="bi bi-book text-success" style="font-size: 3rem;"></i>
+            </a>
+            <h4 class="mt-3">Plant Care Tips</h4>
+            <p>Access curated tips to prevent common plant diseases and boost growth.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

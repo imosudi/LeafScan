@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block main_pages %}
+
+<div class="container py-2">
+    <div class="text-center mb-3">
+        <h1 class="fw-bold text-success">Plant Care Tips</h1>
+        <p class="lead text-muted">Boost your plant’s health and prevent common diseases with these expert tips.</p>
+    </div>
+
+    <div class="row">
+        {% for tip in tips %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-success">{{ tip.title }}</h5>
+                    <p class="card-text">{{ tip.content }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{{ url_for('index') }}" class="btn btn-outline-success">Back to Home</a>
+    </div>
+</div>
+
+{% endblock %}
