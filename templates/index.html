@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+    {% block main_page %}
+    <h2 class="mb-4">Diagnosis Inputs</h2>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="leaf_color" class="form-label">Leaf Colour</label>
+                    <select class="form-select" name="leaf_color" id="leaf_color" required>
+                        <option value="">Select</option>
+                        <option value="green">Green</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="brown">Brown</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="spots" class="form-label">Spots on Leaves?</label>
+                    <select class="form-select" name="spots" id="spots" required>
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="wilt" class="form-label">Are Leaves Wilting?</label>
+                    <select class="form-select" name="wilt" id="wilt" required>
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="plant_image" class="form-label">Upload Image (Optional)</label>
+                    <input type="file" class="form-control" name="plant_image" id="plant_image" accept=".jpg,.jpeg,.png">
+                </div>
+                <button type="submit" class="btn btn-success">Diagnose</button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

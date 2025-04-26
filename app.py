@@ -1,0 +1,88 @@
+from flask import Flask, render_template, request, redirect, url_for, session
+from datetime import datetime
+import os
+from werkzeug.utils import secure_filename
+
+app = Flask(__name__)
+app.secret_key = 'secret'
+UPLOAD_FOLDER = 'static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# Rules and diagnosis engine
+def diagnose_plant(leaf_color, spots, wilt):
+    explanation = ""
+    diagnosis = "Unknown condition"
+
+    if leaf_color == 'yellow' and spots == 'yes' and wilt == 'yes':
+        diagnosis = "Fungal Infection"
+        explanation = "Yellowing, spots, and wilting often indicate fungal issues."
+    elif leaf_color == 'yellow' and spots == 'no' and wilt == 'yes':
+        diagnosis = "Root Rot"
+        explanation = "Yellow leaves and wilting without spots suggest root damage."
+    elif leaf_color == 'brown' and spots == 'yes' and wilt == 'no':
+        diagnosis = "Leaf Blight"
+        explanation = "Brown colour with spots is typical of leaf blight."
+    elif leaf_color == 'brown' and spots == 'no' and wilt == 'yes':
+        diagnosis = "Nutrient Deficiency"
+        explanation = "Wilting and browning without spots may indicate lack of potassium."
+    elif leaf_color == 'green' and spots == 'yes' and wilt == 'no':
+        diagnosis = "Insect Damage"
+        explanation = "Green leaves with spotting but no wilting suggest pest attacks."
+    elif leaf_color == 'green' and spots == 'no' and wilt == 'yes':
+        diagnosis = "Water Stress"
+        explanation = "Wilting with green leaves and no spots indicates water imbalance."
+    elif leaf_color == 'yellow' and spots == 'yes' and wilt == 'no':
+        diagnosis = "Early Disease Stage"
+        explanation = "Yellowing and spotting may indicate early-stage disease."
+
+    return diagnosis, explanation
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if 'history' not in session:
+        session['history'] = []
+
+    if request.method == 'POST':
+        leaf_color = request.form['leaf_color']
+        spots = request.form['spots']
+        wilt = request.form['wilt']
+        file = request.files.get('plant_image')
+
+        image_url = None
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            image_url = url_for('static', filename='uploads/' + filename)
+
+        diagnosis, explanation = diagnose_plant(leaf_color, spots, wilt)
+
+        # Save diagnosis to session history
+        session['history'].append({
+            'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'leaf_color': leaf_color,
+            'spots': spots,
+            'wilt': wilt,
+            'diagnosis': diagnosis,
+            'explanation': explanation,
+            'image': image_url
+        })
+        session.modified = True
+
+        return redirect(url_for('result'))
+
+    return render_template('index.html')
+
+@app.route('/result')
+def result():
+    return render_template('result.html', latest=session['history'][-1], history=session['history'])
+
+if __name__ == '__main__':
+    app.run(debug=True)
