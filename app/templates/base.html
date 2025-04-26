@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,22 +123,56 @@
                 }
             });
     </script>
+    
+        <script>
+            
+        </script>
         {{ moment.include_moment() }}
     {% endblock scripts %}
 </head>
-<body class="bg-light">
+<body class="d-flex flex-column min-vh-100 bg-light">
     <div class="container py-4">
-        <h1 class="nav-section mb-4"> {% include 'includes/icon3.html' %}  Plant Health Diagnosis System</h1>
+         <!-- Navigation Bar -->
+        <nav class="navbar nav-section navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    {% include 'includes/icon3.html' %}  Plant Health Diagnosis System
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-section fw-bolder text-success  {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-section fw-bolder text-success {% if request.endpoint == 'diagnosis' %}active{% endif %}" href="{{ url_for('diagnosis') }}">Diagnosis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-section fw-bolder text-success {% if request.endpoint == 'tips' %}active{% endif %}" href="{{ url_for('tips') }}">Tips</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-section fw-bolder text-success {% if request.endpoint == 'history' %}active{% endif %}" href="{{ url_for('history') }}">History</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         
         {% block main_pages %}
         
         {% endblock %}
     
-    </div>
-    <footer class="text-center">
-        <p>LeafScan &copy; {{ moment().format('YYYY') }} Mosudi I. O. All Rights Reserved: 
-            <a href="mailto:imosudi@outlook.com">imosudi@outlook.com</a>
-        </p>
+    </div> <!-- Close .container -->
+
+    <footer class="footer mt-auto py-3 bg-white border-top">
+        <div class="container text-center">
+            <small class="text-muted">
+                LeafScan &copy; {{ moment().format('YYYY') }} All Rights Reserved: 
+                Mosudi I. O. | <a href="mailto:imosudi@outlook.com" class="text-decoration-none">imosudi@outlook.com</a>
+            </small>
+        </div>
     </footer>        
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script>
@@ -179,3 +214,5 @@
         </script>
 </body>
 </html>
+
+

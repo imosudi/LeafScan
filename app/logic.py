@@ -249,3 +249,156 @@ class PlantDiagnosisEngine(object):
         
         return report.strip()
 
+def split_plant_diagnosis_report(report):
+    sections = ["DIAGNOSIS:", "SEVERITY:", "EXPLANATION:", "RECOMMENDED TREATMENT:", "PREVENTIVE MEASURES:"]
+    result = {}
+    
+    for section in sections:
+        # Split the report by the section keyword
+        if section in report:
+            # Get the part of the report after the section keyword
+            part = report.split(section)[1].strip()
+            # Find the next section if it exists
+            next_section = next((s for s in sections if s in part), None)
+            if next_section:
+                # Get the content up to the next section
+                content = part.split(next_section)[0].strip()
+            else:
+                content = part
+            result[section] = content.strip()
+    
+    return result
+
+
+# Rules and diagnosis engine
+def diagnose_plant(leaf_color, spots, wilt):
+    explanation = ""
+    diagnosis = "Unknown condition"
+
+    if leaf_color == 'yellow' and spots == 'yes' and wilt == 'yes':
+        diagnosis = "Fungal Infection"
+        explanation = "Yellowing, spots, and wilting often indicate fungal issues."
+    elif leaf_color == 'yellow' and spots == 'no' and wilt == 'yes':
+        diagnosis = "Root Rot"
+        explanation = "Yellow leaves and wilting without spots suggest root damage."
+    elif leaf_color == 'brown' and spots == 'yes' and wilt == 'no':
+        diagnosis = "Leaf Blight"
+        explanation = "Brown colour with spots is typical of leaf blight."
+    elif leaf_color == 'brown' and spots == 'no' and wilt == 'yes':
+        diagnosis = "Nutrient Deficiency"
+        explanation = "Wilting and browning without spots may indicate lack of potassium."
+    elif leaf_color == 'green' and spots == 'yes' and wilt == 'no':
+        diagnosis = "Insect Damage"
+        explanation = "Green leaves with spotting but no wilting suggest pest attacks."
+    elif leaf_color == 'green' and spots == 'no' and wilt == 'yes':
+        diagnosis = "Water Stress"
+        explanation = "Wilting with green leaves and no spots indicates water imbalance."
+    elif leaf_color == 'yellow' and spots == 'yes' and wilt == 'no':
+        diagnosis = "Early Disease Stage"
+        explanation = "Yellowing and spotting may indicate early-stage disease."
+
+    return diagnosis, explanation
+
+
+tips_data = [
+        {
+            'title': 'Avoid Overwatering',
+            'content': 'Overwatering can cause root rot. Water your plants only when the topsoil feels dry to the touch.'
+        },
+        {
+            'title': 'Use Well-Draining Soil',
+            'content': 'Select soil that allows excess water to drain easily, preventing fungal infections in the roots.'
+        },
+        {
+            'title': 'Provide Adequate Sunlight',
+            'content': 'Ensure your plants receive the correct amount of sunlight each day, depending on their species.'
+        },
+        {
+            'title': 'Inspect Leaves Regularly',
+            'content': 'Check for early signs of diseases such as spots, mould, or discolouration, and treat promptly.'
+        },
+        {
+            'title': 'Maintain Good Air Circulation',
+            'content': 'Place plants in a way that allows air to flow between them, reducing the risk of fungal diseases.'
+        },
+        {
+            'title': 'Use Organic Fertilisers',
+            'content': 'Natural fertilisers enhance plant growth without the harmful chemicals that can weaken plant immunity.'
+        },
+        {
+            'title': 'Prune Damaged Areas',
+            'content': 'Remove dead or yellowing leaves promptly to prevent disease spread and encourage new growth.'
+        },
+        {
+            'title': 'Rotate Plants Regularly',
+            'content': 'Turn potted plants a quarter turn each week to ensure even growth and prevent leaning toward light sources.'
+        },
+        {
+            'title': 'Monitor Humidity Levels',
+            'content': 'Many plants thrive in higher humidity. Consider using a humidifier or pebble trays for tropical species.'
+        },
+        {
+            'title': 'Repot When Necessary',
+            'content': 'Repot plants when they become root-bound, typically every 1-2 years depending on growth rate.'
+        },
+        {
+            'title': 'Clean Dust from Leaves',
+            'content': 'Gently wipe leaves with a damp cloth to remove dust, which can block light absorption and respiration.'
+        },
+        {
+            'title': 'Research Specific Needs',
+            'content': 'Each plant species has unique requirements. Research your specific plants for optimal care.'
+        },
+        {
+            'title': 'Use Appropriate Pot Sizes',
+            'content': 'Choose pots that provide adequate room for root growth but aren\'t excessively large.'
+        },
+        {
+            'title': 'Season-Specific Care',
+            'content': 'Adjust watering, fertilizing, and light exposure based on seasonal growth patterns.'
+        },
+        {
+            'title': 'Prevent Pest Infestations',
+            'content': 'Regularly inspect for common pests like aphids and spider mites. Treat with natural solutions when possible.'
+        },
+        {
+            'title': 'Quarantine New Plants',
+            'content': 'Keep newly purchased plants isolated for 1-2 weeks to prevent potential pest spread to your existing collection.'
+        },
+        {
+            'title': 'Avoid Temperature Extremes',
+            'content': 'Keep plants away from cold drafts, heaters, and air conditioners that can cause stress and damage.'
+        },
+        {
+            'title': 'Use Rainwater When Possible',
+            'content': 'Rainwater is free of chemicals found in tap water that can build up in soil and harm sensitive plants.'
+        },
+        {
+            'title': 'Group Plants by Needs',
+            'content': 'Arrange plants with similar water, light, and humidity requirements together for more efficient care.'
+        },
+        {
+            'title': 'Maintain Soil pH Balance',
+            'content': 'Different plants thrive in different soil pH levels. Test and adjust soil pH for optimal nutrient absorption.'
+        },
+        {
+            'title': 'Provide Support for Tall Plants',
+            'content': 'Use stakes, trellises, or moss poles to support climbing plants and prevent stem damage.'
+        },
+        {
+            'title': 'Practice Companion Planting',
+            'content': 'Some plants benefit each other when grown together by repelling pests or enhancing growth patterns.'
+        },
+        {
+            'title': 'Acclimate Plants Gradually',
+            'content': 'When moving plants outdoors or to a brighter location, introduce them to new conditions gradually to prevent shock.'
+        }
+    ];
+    
+
+
+
+diag_history = {
+    "history": []
+}
+

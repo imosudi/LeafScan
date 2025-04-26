@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+
+{% block main_pages %}
+<h2 class="mb-4">Diagnosis Inputs</h2>
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="header-section">
+            <h2 class="text-center mb-2">Complete the form below to diagnose your plant's condition</h2>
+        </div>
+
+        <form action="/result" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+
+            <!-- Primary Symptoms Section -->
+            <div class="form-section">
+                <h4><i class="bi bi-clipboard-pulse"></i> Primary Symptoms</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="leaf_color" class="form-label"><i class="bi bi-palette"></i> Leaf Color</label>
+                        <select class="form-select" name="leaf_color" id="leaf_color" required>
+                            <option value="">Select Color</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="brown">Brown</option>
+                            <option value="pale_green">Pale Green</option>
+                            <option value="purple">Purple</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a leaf color.</div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="spots" class="form-label"><i class="bi bi-droplet-half"></i> Spots on Leaves</label>
+                        <select class="form-select" name="spots" id="spots" required>
+                            <option value="">Select Option</option>
+                            <option value="no">No Spots</option>
+                            <option value="yes">Yes (General)</option>
+                            <option value="yellow_spots">Yellow Spots</option>
+                            <option value="black_spots">Black Spots</option>
+                            <option value="brown_spots">Brown Spots</option>
+                        </select>
+                        <div class="invalid-feedback">Please select an option for spots.</div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="wilt" class="form-label"><i class="bi bi-water"></i> Wilting Status</label>
+                        <select class="form-select" name="wilt" id="wilt" required>
+                            <option value="">Select Option</option>
+                            <option value="no">No Wilting</option>
+                            <option value="mild">Mild Wilting</option>
+                            <option value="yes">Moderate Wilting</option>
+                            <option value="severe">Severe Wilting</option>
+                        </select>
+                        <div class="invalid-feedback">Please select wilting status.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Symptoms Section -->
+            <div class="form-section">
+                <h4><i class="bi bi-clipboard-check"></i> Additional Symptoms</h4>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="leaf_curling" class="form-label"><i class="bi bi-arrow-repeat"></i> Leaf Curling</label>
+                        <select class="form-select" name="leaf_curling" id="leaf_curling">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="stunted_growth" class="form-label"><i class="bi bi-bar-chart-line"></i> Stunted Growth</label>
+                        <select class="form-select" name="stunted_growth" id="stunted_growth">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="leaf_drop" class="form-label"><i class="bi bi-arrow-down-circle"></i> Leaf Drop</label>
+                        <select class="form-select" name="leaf_drop" id="leaf_drop">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="stem_damage" class="form-label"><i class="bi bi-flower2"></i> Stem Damage</label>
+                        <select class="form-select" name="stem_damage" id="stem_damage">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="unusual_smell" class="form-label"><i class="bi bi-wind"></i> Unusual Smell</label>
+                        <select class="form-select" name="unusual_smell" id="unusual_smell">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="soil_condition" class="form-label"><i class="bi bi-cloud-drizzle"></i> Soil Condition</label>
+                        <select class="form-select" name="soil_condition" id="soil_condition">
+                            <option value="normal">Normal</option>
+                            <option value="dry">Dry</option>
+                            <option value="wet">Wet</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Upload and Camera Capture Section -->
+            <div class="form-section">
+                <h4><i class="bi bi-camera"></i> Plant Image</h4>
+
+                <!-- Upload Image -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <label for="plant_image" class="form-label"><i class="bi bi-file-image"></i> Upload Image (Optional)</label>
+                        <input type="file" class="form-control" name="plant_image" id="plant_image" accept="image/*" onchange="previewImage(event)">
+                        <div class="form-text">You can upload an image from your device.</div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="text-center my-4">
+                    <div class="row">
+                        <div class="col-5"><hr></div>
+                        <div class="col-2 text-center"><strong>OR</strong></div>
+                        <div class="col-5"><hr></div>
+                    </div>
+                </div>
+
+                <!-- Live Camera -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <label class="form-label"><i class="bi bi-camera-video"></i> Take a Picture (Live)</label>
+                        <div class="camera">
+                            <video id="camera-stream" class="img-fluid rounded mb-2" autoplay></video>
+                            <canvas id="snapshot" style="display:none;"></canvas>
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-success" onclick="takeSnapshot()">
+                                    <i class="bi bi-camera"></i> Capture Photo
+                                </button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="captured_image" id="captured_image">
+                        <div class="form-text">Allow camera access to take a live photo of your plant.</div>
+                    </div>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                <i class="bi bi-image"></i> Image Preview
+                            </div>
+                            <div class="card-body text-center p-3">
+                                <div class="image-preview" id="imagePreview">
+                                    <img src="" alt="Image Preview" id="preview-img" class="img-fluid rounded shadow-sm" style="max-height: 300px; display: none;">
+                                    <div id="preview-text" class="text-muted p-4">
+                                        <i class="bi bi-card-image fs-1"></i>
+                                        <p class="mt-2">Image preview will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Additional Notes Section -->
+            <div class="form-section">
+                <h4><i class="bi bi-pencil-square"></i> Additional Information</h4>
+                <div class="mb-3">
+                    <label for="notes" class="form-label"><i class="bi bi-chat-left-text"></i> Notes or Observations</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter any additional observations or details about your plant..."></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="plant_type" class="form-label"><i class="bi bi-flower3"></i> Plant Type (If Known)</label>
+                        <input type="text" class="form-control" id="plant_type" name="plant_type" placeholder="E.g., Rose, Tomato, Fern, etc.">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="plant_age" class="form-label"><i class="bi bi-calendar3"></i> Plant Age (If Known)</label>
+                        <input type="text" class="form-control" id="plant_age" name="plant_age" placeholder="E.g., 2 months, 1 year, etc.">
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="bi bi-search-heart"></i> Diagnose Plant
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript Section -->
+<script>
+    // Preview uploaded image
+    function previewImage(event) {
+        const preview = document.getElementById('preview-img');
+        const text = document.getElementById('preview-text');
+        preview.src = URL.createObjectURL(event.target.files[0]);
+        preview.style.display = 'block';
+        text.style.display = 'none';
+    }
+
+    // Access camera
+    const video = document.getElementById('camera-stream');
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        video.srcObject = stream;
+    })
+    .catch(err => {
+        console.error("Error accessing camera: ", err);
+    });
+
+    // Capture snapshot safely
+    function takeSnapshot() {
+        const canvas = document.getElementById('snapshot');
+        const context = canvas.getContext('2d');
+        
+        if (video.readyState >= 2) { // 2 = HAVE_CURRENT_DATA
+            const width = video.videoWidth;
+            const height = video.videoHeight;
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+
+            const dataURL = canvas.toDataURL('image/png');
+            document.getElementById('captured_image').value = dataURL;
+
+            const preview = document.getElementById('preview-img');
+            const text = document.getElementById('preview-text');
+            preview.src = dataURL;
+            preview.style.display = 'block';
+            text.style.display = 'none';
+        } else {
+            alert("Camera not ready yet. Please wait a second and try again.");
+        }
+    }
+</script>
+{% endblock %}

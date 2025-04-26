@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block main_pages %}
+<div class="container">
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            <h4>Diagnosis History</h4>
+        </div>
+        <div class="card-body">
+            {% if history %}
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for record in history %}
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                {% if record.image %}
+                                    <img src="{{ record.image }}" class="card-img-top" alt="Plant Image" style="height: 200px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ record.diagnosis }}</h5>
+                                    <p class="card-text">
+                                        <strong>Time:</strong> {{ record.time }}<br>
+                                        <strong>Leaf Colour:</strong> {{ record.leaf_color | title }}<br>
+                                        <strong>Spots:</strong> {{ record.spots | replace('_', ' ') | title }}<br>
+                                        <strong>Wilt:</strong> {{ record.wilt | title }}<br>
+                                        <strong>Severity:</strong> {{ record.severity }}
+                                    </p>
+                                    <a class="btn btn-outline-success" data-bs-toggle="collapse" href="#collapse{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                        View Details
+                                    </a>
+                                    <div class="collapse mt-2" id="collapse{{ loop.index }}">
+                                        <div class="card card-body">
+                                            <p><strong>Leaf Curling:</strong> {{ record.leaf_curling }}</p>
+                                            <p><strong>Stunted Growth:</strong> {{ record.stunted_growth }}</p>
+                                            <p><strong>Leaf Drop:</strong> {{ record.leaf_drop }}</p>
+                                            <p><strong>Stem Damage:</strong> {{ record.stem_damage }}</p>
+                                            <p><strong>Unusual Smell:</strong> {{ record.unusual_smell }}</p>
+                                            <p><strong>Soil Condition:</strong> {{ record.soil_condition }}</p>
+                                            <p><strong>Plant Type:</strong> {{ record.plant_type }}</p>
+                                            <p><strong>Plant Age:</strong> {{ record.plant_age }}</p>
+                                            <p><strong>Notes:</strong> {{ record.notes }}</p>
+                                            <p><strong>Explanation:</strong> {{ record.explanation }}</p>
+                                            <p><strong>Treatment:</strong> {{ record.treatment }}</p>
+                                            <p><strong>Preventive Measures:</strong> {{ record.preventive_measures }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted">No diagnosis history available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

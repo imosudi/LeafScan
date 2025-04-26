@@ -9,7 +9,10 @@
                     <div class="form-section">
                         <h4>Diagnosis Result</h4>
                         <p><strong>Diagnosis:</strong> {{ latest.diagnosis }}</p>
+                        <p><strong>Severity:</strong> {{ latest.diagnosis }}</p>
                         <p><strong>Explanation:</strong> {{ latest.explanation }}</p>
+                        <p><strong>Recommended Treatment:</strong> {{ latest.explanation }}</p>
+                        <p><strong>Preventive Measures:</strong> {{ latest.explanation }}</p>
                         {% if latest.treatment %}
                             <p><strong>Treatment:</strong> {{ latest.treatment }}</p>
                         {% endif %}
@@ -28,7 +31,7 @@
                         {% endif %}
                     </div>
 
-                    <a href="{{ url_for('index') }}" class="btn btn-success mt-3">Diagnose Another Plant</a>
+                    <a href="{{ url_for('diagnosis') }}" class="btn btn-success mt-3">Diagnose Another Plant</a>
                 </div>
 
                 <div class="col-md-4">
