@@ -1,4 +1,12 @@
 
+
+from app import ALLOWED_EXTENSIONS
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 """
 Plant Disease Diagnosis System
 This module provides comprehensive plant condition diagnosis based on multiple symptoms.
@@ -241,42 +249,3 @@ class PlantDiagnosisEngine(object):
         
         return report.strip()
 
-
-"""# Example usage
-if __name__ == "__main__":
-    # Create an instance of the diagnosis engine
-    diagnosis_system = PlantDiagnosisEngine()
-    
-    # Basic usage with core symptoms
-    diagnosis, explanation, treatment, severity, preventive_measures = diagnosis_system.diagnose_plant(
-        leaf_color='yellow', 
-        spots='yes', 
-        wilt='yes'
-    )
-    
-    print(f"Basic Diagnosis: {diagnosis}")
-    print(f"Explanation: {explanation}")
-    print(f"Treatment: {treatment}")
-    print(f"Severity: {severity}")
-    print(f"Prevention: {preventive_measures}\n")
-    
-    # Advanced usage with additional symptoms
-    additional_info = {
-        'leaf_curling': 'yes',
-        'stunted_growth': 'yes',
-        'leaf_drop': 'no',
-        'stem_damage': 'no',
-        'unusual_smell': 'yes',
-        'soil_condition': 'wet'
-    }
-    
-    # Get formatted report
-    report = diagnosis_system.get_diagnosis_report(
-        leaf_color='yellow', 
-        spots='yes', 
-        wilt='yes',
-        additional_symptoms=additional_info
-    )
-    
-    print("DETAILED DIAGNOSIS REPORT:")
-    print(report)"""

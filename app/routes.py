@@ -4,21 +4,11 @@ from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
 
-from logic import PlantDiagnosisEngine
+from .logic import allowed_file,PlantDiagnosisEngine
+from . import app, ALLOWED_EXTENSIONS
 
 
 
-app = Flask(__name__)
-app.secret_key = 'secret'
-UPLOAD_FOLDER = 'static/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Rules and diagnosis engine
 def diagnose_plant(leaf_color, spots, wilt):
@@ -140,6 +130,3 @@ def index():
 @app.route('/result')
 def result():
     return render_template('result.html', latest=session['history'][-1], history=session['history'])
-
-if __name__ == '__main__':
-    app.run(debug=True)
