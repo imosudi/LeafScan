@@ -1,5 +1,6 @@
 import time
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_moment import Moment
 from datetime import datetime
 import os
 from werkzeug.utils import secure_filename
@@ -7,6 +8,8 @@ from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
+moment = Moment(app)
+
 
 app.secret_key = 'this is a terrible secret it, if you break into this app you will be presecuted, if unconvicted, you will be persecuted and persecuted'
 UPLOAD_FOLDER = 'static/uploads'

@@ -6,16 +6,18 @@
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="header-section">
-                <h1 class="text-center mb-2">Plant Health Diagnosis System</h1>
-                <p class="text-center mb-0">Complete the form below to diagnose your plant's condition</p>
+                <h2 class="text-center mb-2"> Complete the form below to diagnose your plant's condition</h2>
             </div>
             <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+
                 <!-- Primary Symptoms Section -->
                 <div class="form-section">
-                    <h4>Primary Symptoms</h4>
+                    <h4><i class="bi bi-clipboard-pulse"></i> Primary Symptoms</h4>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="leaf_color" class="form-label">Leaf Color</label>
+                            <label for="leaf_color" class="form-label">
+                                <i class="bi bi-palette"></i> Leaf Color
+                            </label>
                             <select class="form-select" name="leaf_color" id="leaf_color" required>
                                 <option value="">Select Color</option>
                                 <option value="green">Green</option>
@@ -24,13 +26,13 @@
                                 <option value="pale_green">Pale Green</option>
                                 <option value="purple">Purple</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select a leaf color.
-                            </div>
+                            <div class="invalid-feedback">Please select a leaf color.</div>
                         </div>
-    
+            
                         <div class="col-md-4 mb-3">
-                            <label for="spots" class="form-label">Spots on Leaves</label>
+                            <label for="spots" class="form-label">
+                                <i class="bi bi-droplet-half"></i> Spots on Leaves
+                            </label>
                             <select class="form-select" name="spots" id="spots" required>
                                 <option value="">Select Option</option>
                                 <option value="no">No Spots</option>
@@ -39,13 +41,13 @@
                                 <option value="black_spots">Black Spots</option>
                                 <option value="brown_spots">Brown Spots</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select an option for spots.
-                            </div>
+                            <div class="invalid-feedback">Please select an option for spots.</div>
                         </div>
-    
+            
                         <div class="col-md-4 mb-3">
-                            <label for="wilt" class="form-label">Wilting Status</label>
+                            <label for="wilt" class="form-label">
+                                <i class="bi bi-water"></i> Wilting Status
+                            </label>
                             <select class="form-select" name="wilt" id="wilt" required>
                                 <option value="">Select Option</option>
                                 <option value="no">No Wilting</option>
@@ -53,61 +55,71 @@
                                 <option value="yes">Moderate Wilting</option>
                                 <option value="severe">Severe Wilting</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select wilting status.
-                            </div>
+                            <div class="invalid-feedback">Please select wilting status.</div>
                         </div>
                     </div>
                 </div>
-    
+            
                 <!-- Additional Symptoms Section -->
                 <div class="form-section">
-                    <h4>Additional Symptoms</h4>
+                    <h4><i class="bi bi-clipboard-check"></i> Additional Symptoms</h4>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="leaf_curling" class="form-label">Leaf Curling</label>
+                            <label for="leaf_curling" class="form-label">
+                                <i class="bi bi-arrow-repeat"></i> Leaf Curling
+                            </label>
                             <select class="form-select" name="leaf_curling" id="leaf_curling">
                                 <option value="no">No</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
-    
+            
                         <div class="col-md-4 mb-3">
-                            <label for="stunted_growth" class="form-label">Stunted Growth</label>
+                            <label for="stunted_growth" class="form-label">
+                                <i class="bi bi-bar-chart-line"></i> Stunted Growth
+                            </label>
                             <select class="form-select" name="stunted_growth" id="stunted_growth">
                                 <option value="no">No</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
-    
+            
                         <div class="col-md-4 mb-3">
-                            <label for="leaf_drop" class="form-label">Leaf Drop</label>
+                            <label for="leaf_drop" class="form-label">
+                                <i class="bi bi-arrow-down-circle"></i> Leaf Drop
+                            </label>
                             <select class="form-select" name="leaf_drop" id="leaf_drop">
                                 <option value="no">No</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
                     </div>
-    
+            
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="stem_damage" class="form-label">Stem Damage</label>
+                            <label for="stem_damage" class="form-label">
+                                <i class="bi bi-flower2"></i> Stem Damage
+                            </label>
                             <select class="form-select" name="stem_damage" id="stem_damage">
                                 <option value="no">No</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
-    
+            
                         <div class="col-md-4 mb-3">
-                            <label for="unusual_smell" class="form-label">Unusual Smell</label>
+                            <label for="unusual_smell" class="form-label">
+                                <i class="bi bi-wind"></i> Unusual Smell
+                            </label>
                             <select class="form-select" name="unusual_smell" id="unusual_smell">
                                 <option value="no">No</option>
                                 <option value="yes">Yes</option>
                             </select>
                         </div>
-    
+            
                         <div class="col-md-4 mb-3">
-                            <label for="soil_condition" class="form-label">Soil Condition</label>
+                            <label for="soil_condition" class="form-label">
+                                <i class="bi bi-cloud-drizzle"></i> Soil Condition
+                            </label>
                             <select class="form-select" name="soil_condition" id="soil_condition">
                                 <option value="normal">Normal</option>
                                 <option value="dry">Dry</option>
@@ -116,13 +128,15 @@
                         </div>
                     </div>
                 </div>
-                
+            
                 <!-- Image Upload Section -->
                 <div class="form-section">
-                    <h4>Plant Image</h4>
+                    <h4><i class="bi bi-camera"></i> Plant Image</h4>
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label for="plant_image" class="form-label">Upload Image (Optional)</label>
+                            <label for="plant_image" class="form-label">
+                                <i class="bi bi-file-image"></i> Upload Image (Optional)
+                            </label>
                             <input type="file" class="form-control" name="plant_image" id="plant_image" accept=".jpg,.jpeg,.png">
                             <div class="form-text">For better diagnosis, upload a clear image of affected plant parts.</div>
                             <div class="image-preview" id="imagePreview">
@@ -132,32 +146,42 @@
                         </div>
                     </div>
                 </div>
-                
+            
                 <!-- Additional Notes Section -->
                 <div class="form-section">
-                    <h4>Additional Information</h4>
+                    <h4><i class="bi bi-pencil-square"></i> Additional Information</h4>
                     <div class="mb-3">
-                        <label for="notes" class="form-label">Notes or Observations</label>
+                        <label for="notes" class="form-label">
+                            <i class="bi bi-chat-left-text"></i> Notes or Observations
+                        </label>
                         <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Enter any additional observations or details about your plant..."></textarea>
                     </div>
-                    
+            
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="plant_type" class="form-label">Plant Type (If Known)</label>
+                            <label for="plant_type" class="form-label">
+                                <i class="bi bi-flower3"></i> Plant Type (If Known)
+                            </label>
                             <input type="text" class="form-control" id="plant_type" name="plant_type" placeholder="E.g., Rose, Tomato, Fern, etc.">
                         </div>
-                        
+            
                         <div class="col-md-6 mb-3">
-                            <label for="plant_age" class="form-label">Plant Age (If Known)</label>
+                            <label for="plant_age" class="form-label">
+                                <i class="bi bi-calendar3"></i> Plant Age (If Known)
+                            </label>
                             <input type="text" class="form-control" id="plant_age" name="plant_age" placeholder="E.g., 2 months, 1 year, etc.">
                         </div>
                     </div>
                 </div>
-                
+            
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                    <button type="submit" class="btn btn-success btn-lg">Diagnose Plant</button>
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-search-heart"></i> Diagnose Plant
+                    </button>
                 </div>
+            
             </form>
+            
         </div>
     </div>
     {% endblock %}
