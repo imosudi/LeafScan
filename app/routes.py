@@ -131,6 +131,7 @@ def result():
     except (FileNotFoundError, json.JSONDecodeError):
         history_list = []
 
+    # Grabbing the form inputs
     if request.method == 'POST':
         leaf_color      = request.form['leaf_color']
         spots           = request.form['spots']

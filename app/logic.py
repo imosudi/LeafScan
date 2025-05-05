@@ -203,7 +203,6 @@ class PlantDiagnosisEngine(object):
         return diagnosis, explanation, treatment, severity, preventive_measures
     
     def _increase_severity(self, current_severity):
-        """Increase the severity level by one step."""
         severity_levels = ["Unknown", "Mild", "Mild to Moderate", "Moderate", "Moderate to Severe", "Severe"]
         try:
             current_index = severity_levels.index(current_severity)
