@@ -5,7 +5,7 @@
 
 **LeafScan** is an AI-powered plant disease diagnostic tool that helps gardeners, farmers, and plant enthusiasts identify and treat plant diseases quickly and accurately. The system combines machine learning, expert knowledge, and an easy-to-use web interface to provide instant, reliable diagnosis and treatment suggestions.
 
----
+
 
 ## 🚀 Features
 
@@ -15,7 +15,7 @@
 - 💡 Disease treatment suggestions  
 - 🌐 Flask-based web application
 
----
+
 
 ## 📦 Installation and Setup
 
@@ -37,7 +37,7 @@ git clone https://github.com/ORIGINAL-AUTHOR/leafscan.git
 cd leafscan
 ```
 
----
+
 
 ### 2. Create a Python Virtual Environment
 
@@ -54,7 +54,7 @@ source venv/bin/activate
 venv\Scripts\activate
 ```
 
----
+
 
 ### 3. Install Python Dependencies
 
@@ -64,7 +64,7 @@ Install required packages using:
 pip install -r requirements.txt
 ```
 
----
+
 
 ### 4. Run the Flask Application
 
@@ -80,7 +80,7 @@ Visit the app in your browser at:
 https://127.0.0.1:9923
 ```
 
----
+
 
 ## 🛠️ Project Structure
 
@@ -147,13 +147,13 @@ We welcome contributions! Here's how:
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [BSD 3-Clause License](LICENSE).
 
----
+
 
 ## 👩‍💻 Maintainer
 
-Developed and maintained by [imosudi](imosudi@outlook.com).  
+Developed and maintained by [imosudi](https://github.com/imosudi).  
 Inspired by the need for smart, AI-based tools in agriculture and plant care.
 
 ---
