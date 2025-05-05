@@ -1,6 +1,6 @@
 
 import time
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import  render_template, request, redirect, url_for, session
 from datetime import datetime
 import os, json
 from werkzeug.utils import secure_filename
@@ -54,7 +54,7 @@ def index():
         # Initialise diagnosis engine
         diagnosis_system = PlantDiagnosisEngine()
 
-        # Full diagnosis using all features (make sure your class handles this)
+        # Full diagnosis using all features
         diagnosis, explanation, treatment, severity, preventive_measures = diagnosis_system.diagnose_plant(
             leaf_color=leaf_color,
             spots=spots,
@@ -124,6 +124,13 @@ def history():
 
 @app.route('/result', methods=['POST', 'GET'])
 def result():
+    try:
+        with open(diag_history_path, 'r') as f:
+            diag_history = json.load(f)
+            history_list = diag_history.get("history", [])
+    except (FileNotFoundError, json.JSONDecodeError):
+        history_list = []
+
     if request.method == 'POST':
         leaf_color      = request.form['leaf_color']
         spots           = request.form['spots']
@@ -162,7 +169,7 @@ def result():
         # Initialise diagnosis engine
         diagnosis_system = PlantDiagnosisEngine()
 
-        # Full diagnosis using all features (make sure your class handles this)
+        # Full diagnosis using all features
         diagnosis, explanation, treatment, severity, preventive_measures = diagnosis_system.diagnose_plant(
             leaf_color=leaf_color,
             spots=spots,
@@ -206,7 +213,7 @@ def result():
         with open(diag_history_path, 'w') as f:
             json.dump(diag_history, f, indent=4)
 
-        return render_template('result.html', latest=latest,  history=session['history']) #, diagnosis=diagnosis, explanation=explanation, treatment=treatment, severity=severity, preventive_measures=preventive_measures)
+        return render_template('result.html', latest=latest,  history=history_list)#, diagnosis=diagnosis, explanation=explanation, treatment=treatment, severity=severity, preventive_measures=preventive_measures)
 
     return redirect('diagnosis')
 
