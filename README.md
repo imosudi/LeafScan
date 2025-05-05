@@ -139,7 +139,7 @@ We welcome contributions! Here's how:
 
 - Python 3  
 - Flask  
-- OpenCV  
+- OpenCV (Pending) 
 - TensorFlow/Keras or PyTorch  
 - HTML, CSS, JavaScript
 
